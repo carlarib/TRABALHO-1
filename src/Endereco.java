@@ -7,12 +7,17 @@ public class Endereco {
 	private String estado;
 	
 	public Endereco(String rua, int numero, String bairro, String cidade, String estado) {
-		if (!(rua.equals(" ")) || rua != null && numero != 0 && bairro != null || !(bairro.equals(" ")) && cidade != null || !(cidade.equals(" ")) && estado != null || !(estado.equals(" "))){
+		if (!(rua.equals(" ")) || rua != null && numero != 0 && bairro != null || !(bairro.equals(" ")) && 
+				cidade != null || !(cidade.equals(" ")) && estado != null || !(estado.equals(" "))){
 		this.rua = rua;
 		this.numero = numero;
 		this.bairro = bairro;
 		this.cidade = cidade;
 		this.estado = estado;
+		} else {
+			
+			ControleDaUnidade.message("erro-de-insercao");
+			
 		}
 	}
 

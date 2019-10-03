@@ -14,6 +14,7 @@ public abstract class Produto {
 		this.fornecedor = fornecedor;
 		this.precoDeCusto = precoDeCusto;
 		this.precoFinal = precoFinal;
+		
 	}
 	
 	public float getPrecoFinal() {

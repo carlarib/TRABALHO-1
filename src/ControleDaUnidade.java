@@ -11,11 +11,16 @@ public class ControleDaUnidade {
 	private static int clientesIndex = 0;
 	private static float impostos = 0;
 	private static float metaDeVenda;
+	private static float valorClienteGold;
+	private static float valorClientePlatinum;
 	
 	
-	public ControleDaUnidade(float metaDeVenda) {
+	public ControleDaUnidade(float metaDeVenda, float valorGold, float valorPlatinum) {
 		
 		ControleDaUnidade.metaDeVenda = metaDeVenda;
+		ControleDaUnidade.valorClienteGold = valorGold;
+		ControleDaUnidade.valorClientePlatinum = valorPlatinum;
+		
 		
 		fornecedores = new Fornecedor[50];
 		funcionarios = new Funcionario[50];
@@ -36,6 +41,18 @@ public class ControleDaUnidade {
 		
 	}
 	
+	public static float getValorClienteGold() {
+		
+		return valorClienteGold;
+		
+	}
+
+	public static float getValorClientePlatinum() {
+		
+		return valorClientePlatinum;
+		
+	}
+
 	public static void adicionarFornecedor(Fornecedor fornecedor){
 		
 		if(fornecedoresIndex >= fornecedores.length) {
@@ -103,6 +120,21 @@ public class ControleDaUnidade {
 		
 		produtos[produtosIndex] = produto;
 		produtosIndex++;
+		
+	}
+	
+	public static void message(String mensagem) {
+		
+		switch(mensagem) {
+		
+			case "erro-de-insercao" : System.out.println("Valor inserido inválido! Por favor digite novamente com valores válidos"); break;
+			
+			case "cliente-gold" : System.out.println("O comprador se tornou um cliente gold!"); break;
+		
+			case "cliente-platinum" : System.out.println("O comprador se tornou um cliente platinum!"); break;
+			
+			case "erro-de-compra" : System.out.println("A compra não pode ser concluída!"); break;
+		}
 		
 	}
 	

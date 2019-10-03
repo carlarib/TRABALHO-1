@@ -11,6 +11,8 @@ public abstract class Funcionario extends Pessoa implements Imposto {
 		}
 		else {
 			
+			ControleDaUnidade.message("erro-de-insercao");
+			
 		}
 		
 	}

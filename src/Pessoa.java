@@ -16,6 +16,8 @@ public abstract class Pessoa {
 		}
 		else {
 			
+			ControleDaUnidade.message("erro-de-insercao");
+			
 		}
 	}
 	

@@ -11,4 +11,10 @@ public String tipoDePagamento;
 		
 	}
 	
+	public String getTipoDePagamento() {
+		
+		return this.tipoDePagamento;
+		
+	}
+	
 }
