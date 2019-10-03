@@ -1,7 +1,7 @@
 
 public enum TipoDePagamento {
 
-	AVISTA("� vista"), APRAZO("A prazo");
+	AVISTA("À vista"), APRAZO("À prazo");
 	
 public String tipoDePagamento;
 	

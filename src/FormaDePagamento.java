@@ -1,7 +1,7 @@
 
 public enum FormaDePagamento {
 
-	DEBITO("Débito"), CREDITO("Crédito"), DINHEIRO("Dinheiro");
+	DEBITO("DÃ©bito"), CREDITO("CrÃ©dito"), DINHEIRO("Dinheiro");
 	
 	public String formaDePagamento;
 	

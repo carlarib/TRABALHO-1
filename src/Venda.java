@@ -34,7 +34,7 @@ public class Venda implements Imposto{
 	@Override
 	public void aplicarImposto(float valor) {
 		
-		Controle.adicionaImpostos(0.15f*valor);
+		ControleDaUnidade.adicionaImpostos(0.15f*valor);
 		
 	}
 

@@ -13,7 +13,7 @@ public class Vendedor extends Funcionario {
 
 		float salarioBruto = this.salarioBase;
 		
-		if(this.montanteDeVendas > Controle.getMetaDeVenda()) {
+		if(this.montanteDeVendas > ControleDaUnidade.getMetaDeVenda()) {
 			
 			salarioBruto = this.salarioBase + this.salarioBase*0.1f;
 			

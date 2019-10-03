@@ -6,14 +6,19 @@ public abstract class Funcionario extends Pessoa implements Imposto {
 	public Funcionario(String nome, Endereco endereco, String cpf, String telefone, float salarioBase) {
 		super(nome, endereco, cpf, telefone);
 		
+		if (salarioBase != 0) {
 		this.salarioBase = salarioBase;
+		}
+		else {
+			
+		}
 		
 	}
 	
 	@Override
 	public void aplicarImposto(float salario) {
 	
-		Controle.adicionaImpostos(salario*0.18f);
+		ControleDaUnidade.adicionaImpostos(salario*0.18f);
 		
 		
 	}

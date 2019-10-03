@@ -8,7 +8,7 @@ public class Pagamento {
 		
 		switch(tipoPagamento) {
 		
-		case "À vista" : this.tipoDePagamento = TipoDePagamento.AVISTA; this.parcelas = 0; break;
+		case "Ã€ vista" : this.tipoDePagamento = TipoDePagamento.AVISTA; this.parcelas = 0; break;
 		
 		case "A prazo" : this.tipoDePagamento = TipoDePagamento.APRAZO; break;
 		
@@ -16,9 +16,9 @@ public class Pagamento {
 		
 		switch(formaPagamento) {
 		
-			case "Débito" : this.formaDePagamento = FormaDePagamento.DEBITO; break;
+			case "DÃ©bito" : this.formaDePagamento = FormaDePagamento.DEBITO; break;
 			
-			case "Crédito" : this.formaDePagamento = FormaDePagamento.CREDITO; break;
+			case "CrÃ©dito" : this.formaDePagamento = FormaDePagamento.CREDITO; break;
 			
 			case "Dinheiro" : this.formaDePagamento = FormaDePagamento.DINHEIRO; break;
 			
