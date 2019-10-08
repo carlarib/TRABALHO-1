@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 public class ControleDaUnidade {
 
 	private static Fornecedor[] fornecedores;
@@ -13,7 +13,7 @@ public class ControleDaUnidade {
 	private static float metaDeVenda;
 	private static float valorClienteGold;
 	private static float valorClientePlatinum;
-	
+	private static Scanner scanner = new Scanner(System.in);
 	
 	public ControleDaUnidade(float metaDeVenda, float valorGold, float valorPlatinum) {
 		
@@ -123,6 +123,63 @@ public class ControleDaUnidade {
 		
 	}
 	
+	public static Produto buscaProdutoPorCodigo() {
+		
+		int codigo = ControleDaUnidade.pedirCodigo();
+		
+		for(int i = 0; i < produtos.length && produtos[i] != null; i++) {
+			
+			if(produtos[i].produtoPorCodigo(codigo)) {
+				
+				return produtos[i].getProdutoEmEstoque();
+				
+			}	
+		}
+		
+		ControleDaUnidade.message("produto-nao-registrado");
+		return null;
+		
+	}
+	
+	public static int pedirCodigo() {
+		
+		System.out.println("Passe o código do produto");
+		int codigo = scanner.nextInt();
+		return codigo;
+		
+	}
+	
+	public static boolean solicitarProdutoAoFornecedorAtual() {
+		
+		System.out.println("O fornecedor atual aceitou sua solicitação? (s/n) ");
+		char resposta = scanner.next().charAt(0);
+		
+		return (resposta == 's');
+		
+	}
+	
+	public static Fornecedor solicitarProduto() {
+
+		char resposta;
+		
+		for(int i = 0; i < fornecedores.length && fornecedores[i] != null; i++) {
+			
+			System.out.println("O fornecedor " + fornecedores[i].getNome() + " aceitou sua solicitação? (s/n) ");
+			resposta = scanner.next().charAt(0);
+			scanner.nextLine();
+			
+			if(resposta == 's'){
+				
+				return fornecedores[i].fornecerProduto();
+				
+			}
+			
+		}
+		
+		return null;
+		
+	}
+	
 	public static void message(String mensagem) {
 		
 		switch(mensagem) {
@@ -133,7 +190,11 @@ public class ControleDaUnidade {
 		
 			case "cliente-platinum" : System.out.println("O comprador se tornou um cliente platinum!"); break;
 			
-			case "erro-de-compra" : System.out.println("A compra nÃ£o pode ser concluÃ­da!"); break;
+			case "erro-de-compra" : System.out.println("A compra não pode ser concluída!"); break;
+			
+			case "produto-nao-registrado" : System.out.println("O produto não está registrado ou disponível no estoque"); break;
+			
+			default : System.out.println(mensagem);
 		}
 		
 	}

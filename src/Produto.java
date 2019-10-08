@@ -15,6 +15,25 @@ public abstract class Produto {
 		this.precoDeCusto = precoDeCusto;
 		this.precoFinal = precoFinal;
 		
+		new Estoque(this);
+		
+	}
+	
+	public Produto(String nome, int codigo, Fornecedor fornecedor, float precoDeCusto, float precoFinal, int quantidadeInicial) {
+		this.nome = nome;
+		this.codigo = codigo;
+		this.fornecedor = fornecedor;
+		this.precoDeCusto = precoDeCusto;
+		this.precoFinal = precoFinal;
+		
+		new Estoque(this, quantidadeInicial);
+		
+	}
+	
+	public String getNome() {
+		
+		return this.nome;
+		
 	}
 	
 	public float getPrecoFinal() {
@@ -23,4 +42,21 @@ public abstract class Produto {
 		
 	}
 	
+	public Fornecedor getFornecedor() {
+		
+		return this.fornecedor;
+		
+	}
+	
+	public void setFornecedor(Fornecedor fornecedor) {
+		
+		this.fornecedor = fornecedor;
+		
+	}
+	
+	public int getCodigo() {
+		
+		return this.codigo;
+		
+	}
 }

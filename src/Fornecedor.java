@@ -12,6 +12,18 @@ public abstract class Fornecedor {
 		
 	}
 	
+	public Fornecedor fornecerProduto() {
+		
+		return this;
+		
+	}
+	
+	public String getNome() {
+		
+		return this.nome;
+		
+	}
+	
 	@Override
 	public String toString() {
 		
@@ -20,5 +32,6 @@ public abstract class Fornecedor {
 				+ "CNPJ: " + this.cnpj;
 		
 	}
+	
 	
 }

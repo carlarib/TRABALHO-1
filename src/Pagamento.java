@@ -8,7 +8,7 @@ public class Pagamento {
 		
 		switch(tipoPagamento) {
 		
-		case "Ã€ vista" : this.tipoDePagamento = TipoDePagamento.AVISTA; this.parcelas = 0; break;
+		case "À vista" : this.tipoDePagamento = TipoDePagamento.AVISTA; this.parcelas = 0; break;
 		
 		case "A prazo" : this.tipoDePagamento = TipoDePagamento.APRAZO; break;
 		
@@ -16,9 +16,9 @@ public class Pagamento {
 		
 		switch(formaPagamento) {
 		
-			case "DÃ©bito" : this.formaDePagamento = FormaDePagamento.DEBITO; break;
+			case "Débito" : this.formaDePagamento = FormaDePagamento.DEBITO; break;
 			
-			case "CrÃ©dito" : this.formaDePagamento = FormaDePagamento.CREDITO; break;
+			case "Crédito" : this.formaDePagamento = FormaDePagamento.CREDITO; break;
 			
 			case "Dinheiro" : this.formaDePagamento = FormaDePagamento.DINHEIRO; break;
 			
@@ -29,6 +29,20 @@ public class Pagamento {
 	public void setParcelas(int parcelas) {
 		
 		this.parcelas = parcelas;
+	}
+
+	
+	public TipoDePagamento getTipoDePagamento() {
+	
+		return tipoDePagamento;
+	
+	}
+
+	
+	public FormaDePagamento getFormaDePagamento() {
+	
+		return formaDePagamento;
+	
 	}
 	
 	

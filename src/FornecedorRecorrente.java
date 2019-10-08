@@ -9,6 +9,10 @@ public class FornecedorRecorrente extends Fornecedor {
 	
 	}
 		
-
+	public float getTaxaDeDesconto() {
+		
+		return this.taxaDeDesconto;
+		
+	}
 
 }
