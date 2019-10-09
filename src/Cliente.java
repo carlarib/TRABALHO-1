@@ -19,18 +19,23 @@ public class Cliente extends Pessoa {
 	
 	public void comprar(float valorGasto) {
 		
-		this.valorAcumulado += valorGasto;
+		if(valorGasto > 0.0f) {
+			this.valorAcumulado += valorGasto;
 		
-		if(this.valorAcumulado >= ControleDaUnidade.getValorClientePlatinum()) {
-			
-			this.tipoCliente = TipoCliente.PLATINUM;
-			ControleDaUnidade.message("cliente-platinum");
-			
-		} else if(this.valorAcumulado >= ControleDaUnidade.getValorClienteGold()) {
-			
-			this.tipoCliente = TipoCliente.GOLD;
-			ControleDaUnidade.message("cliente-gold");
-			
+			if(this.valorAcumulado >= ControleDaUnidade.getValorClientePlatinum()) {
+				
+				this.tipoCliente = TipoCliente.PLATINUM;
+				ControleDaUnidade.message("cliente-platinum");
+				
+			} else if(this.valorAcumulado >= ControleDaUnidade.getValorClienteGold()) {
+				
+				this.tipoCliente = TipoCliente.GOLD;
+				ControleDaUnidade.message("cliente-gold");
+				
+			}
+		}
+		else {
+			ControleDaUnidade.message("erro-de-insercao");
 		}
 		
 	}

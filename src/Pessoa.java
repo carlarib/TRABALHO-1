@@ -8,7 +8,7 @@ public abstract class Pessoa {
 	
 	
 	public Pessoa(String nome, Endereco endereco, String cpf, String telefone) {
-		if (nome != null || !(nome.equals(" ")) && endereco != null && cpf.length() == 13 && telefone.length() == 11) {
+		if (nome != null || !(nome.equals(" ")) && endereco != null && cpf.length() == 14 && telefone.length() == 11) {
 		this.nome = nome;
 		this.endereco = endereco;
 		this.cpf = cpf;

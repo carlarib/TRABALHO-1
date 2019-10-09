@@ -17,6 +17,4 @@ public class Padeiro extends Funcionario {
 		return salarioBruto;
 	}
 
-
-
 }

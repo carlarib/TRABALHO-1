@@ -6,8 +6,8 @@ public abstract class Funcionario extends Pessoa implements Imposto {
 	public Funcionario(String nome, Endereco endereco, String cpf, String telefone, float salarioBase) {
 		super(nome, endereco, cpf, telefone);
 		
-		if (salarioBase != 0) {
-		this.salarioBase = salarioBase;
+		if (salarioBase >= 0.0f) {
+			this.salarioBase = salarioBase;
 		}
 		else {
 			
@@ -19,9 +19,12 @@ public abstract class Funcionario extends Pessoa implements Imposto {
 	
 	@Override
 	public void aplicarImposto(float salario) {
-	
-		ControleDaUnidade.adicionaImpostos(salario*0.18f);
-		
+		if (salario > 0.0f) {
+			ControleDaUnidade.adicionaImpostos(salario*0.18f);
+		}	
+		else {
+			ControleDaUnidade.message("erro-de-insercao");
+		}
 		
 	}
 

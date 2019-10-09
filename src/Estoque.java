@@ -19,20 +19,27 @@ public class Estoque {
 	}
 	
 	public boolean produtoPorCodigo(int codigo) {
-		
-		if(this.produtoEmEstoque.getCodigo() == codigo && this.quantidadeEmEstoque > 0) {
+
+		if(String.valueOf(codigo).length() == 6) {
+			if(this.produtoEmEstoque.getCodigo() == codigo && this.quantidadeEmEstoque > 0) {
 			
-			if(this.quantidadeEmEstoque == 2) {
-				
-				this.emitirAlerta();
-				
-			}
+				if(this.quantidadeEmEstoque == 2) {
+					
+					this.emitirAlerta();
+					
+				}
 			
 			return true;
 			
 		}
 		
 		return false;
+
+		}
+		else {
+			ControleDaUnidade.message("erro-de-insercao");
+			return false;
+		}
 		
 	}
 
@@ -56,40 +63,43 @@ public class Estoque {
 	
 	public void reabastecerEstoque(int quantidadeReabastecida) {
 		
-		Fornecedor fornecedorAtual = this.produtoEmEstoque.getFornecedor();
-		boolean produtoFornecido = false;
-		
-		if(fornecedorAtual instanceof FornecedorRecorrente) {
+		if (quantidadeReabastecida > 0 && (quantidadeReabastecida + quantidadeEmEstoque) <= 30) {
+			Fornecedor fornecedorAtual = this.produtoEmEstoque.getFornecedor();
+			boolean produtoFornecido = false;
 			
-			produtoFornecido = ControleDaUnidade.solicitarProdutoAoFornecedorAtual();
-			
-		}
-		
-		if(!produtoFornecido) {
-			
-			Fornecedor fornecedorSolicitado = ControleDaUnidade.solicitarProduto();
-			
-			if(fornecedorSolicitado != null) {
+			if(fornecedorAtual instanceof FornecedorRecorrente) {
 				
-				this.quantidadeEmEstoque += quantidadeReabastecida;
-				this.produtoEmEstoque.setFornecedor(fornecedorSolicitado);
-				
-				ControleDaUnidade.message(this.produtoEmEstoque.getNome() + "foi reabastecido!");
-				
-			} else {
-				
-				
-				ControleDaUnidade.message("É necessário encontrar um novo fornecedor para o produto " + this.produtoEmEstoque.getNome());
+				produtoFornecido = ControleDaUnidade.solicitarProdutoAoFornecedorAtual();
 				
 			}
 			
-		} else {
-			
-			this.quantidadeEmEstoque += quantidadeReabastecida;
-			ControleDaUnidade.message(this.produtoEmEstoque.getNome() + "foi reabastecido!");
-			
+			if(!produtoFornecido) {
+				
+				Fornecedor fornecedorSolicitado = ControleDaUnidade.solicitarProduto();
+				
+				if(fornecedorSolicitado != null) {
+					
+					this.quantidadeEmEstoque += quantidadeReabastecida;
+					this.produtoEmEstoque.setFornecedor(fornecedorSolicitado);
+					
+					ControleDaUnidade.message(this.produtoEmEstoque.getNome() + "foi reabastecido!");
+					
+				} else {
+					
+					
+					ControleDaUnidade.message("É necessário encontrar um novo fornecedor para o produto " + this.produtoEmEstoque.getNome());
+					
+				}
+				
+			} else {
+				
+				this.quantidadeEmEstoque += quantidadeReabastecida;
+				ControleDaUnidade.message(this.produtoEmEstoque.getNome() + "foi reabastecido!");
+				
+			}
 		}
-		
-		
+		else {
+			ControleDaUnidade.message("erro-de-insercao");
+		}
 	}
 }

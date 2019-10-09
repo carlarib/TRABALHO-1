@@ -5,8 +5,6 @@ public class FornecedorRecorrente extends Fornecedor {
 	public FornecedorRecorrente(String nome, Endereco endereco, String cnpj, float taxaDeDesconto) {
 		super(nome, endereco, cnpj);
 		this.taxaDeDesconto = taxaDeDesconto;
-	
-	
 	}
 		
 	public float getTaxaDeDesconto() {

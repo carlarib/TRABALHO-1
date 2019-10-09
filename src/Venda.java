@@ -11,26 +11,34 @@ public class Venda implements Imposto{
 
 	public Venda(Data dataDeVenda, Vendedor vendedor, Pagamento pagamento, Cliente comprador) {
 		
-		this.produtos = this.passarCompras();
-		this.dataDeVenda = dataDeVenda;
-		this.vendedor = vendedor;
-		this.pagamento = pagamento;
-		this.comprador = comprador;
-		
-		this.cobrarCliente();
+		if (dataDeVenda != null && vendedor != null && pagamento != null && comprador != null) {
+			this.produtos = this.passarCompras();
+			this.dataDeVenda = dataDeVenda;
+			this.vendedor = vendedor;
+			this.pagamento = pagamento;
+			this.comprador = comprador;
+			
+			this.cobrarCliente();
+		}
+		else {
+			ControleDaUnidade.message("erro-de-insercao");
+		}
 		
 	}
 	
 	public Venda(Data dataDeVenda, Vendedor vendedor, Pagamento pagamento, Fornecedor comprador) {
-		
-		this.produtos = this.passarCompras();
-		this.dataDeVenda = dataDeVenda;
-		this.vendedor = vendedor;
-		this.pagamento = pagamento;
-		this.fornecedor_comprador = comprador;
-		
-		this.cobrarFornecedor();
-		
+		if (dataDeVenda != null && vendedor != null && pagamento != null && comprador != null) {
+			this.produtos = this.passarCompras();
+			this.dataDeVenda = dataDeVenda;
+			this.vendedor = vendedor;
+			this.pagamento = pagamento;
+			this.fornecedor_comprador = comprador;
+			
+			this.cobrarFornecedor();
+		}
+		else {
+			ControleDaUnidade.message("erro-de-insercao");
+		}
 	}
 	
 	public Produto[] passarCompras() {
@@ -82,18 +90,22 @@ public class Venda implements Imposto{
 		
 		float preco = 0;
 		
-		for(int i = 0; i < this.produtos.length; i++) {
+		if (fornecedor != null) {
+			for(int i = 0; i < this.produtos.length; i++) {
 			
-			if(this.produtos[i].getFornecedor() == fornecedor) {
+				if(this.produtos[i].getFornecedor() == fornecedor) {
 
+					preco += this.produtos[i].getPrecoFinal() - this.produtos[i].getPrecoFinal()*fornecedor.getTaxaDeDesconto();
 				
-				preco += this.produtos[i].getPrecoFinal() - this.produtos[i].getPrecoFinal()*fornecedor.getTaxaDeDesconto();
+				} else {
 				
-			} else {
-				
-				preco += this.produtos[i].getPrecoFinal();
+					preco += this.produtos[i].getPrecoFinal();
 			
+				}
 			}
+		}
+		else {
+			ControleDaUnidade.message("erro-de-insercao");
 		}
 		
 		return preco;
@@ -104,7 +116,12 @@ public class Venda implements Imposto{
 	@Override
 	public void aplicarImposto(float valor) {
 		
-		ControleDaUnidade.adicionaImpostos(0.15f*valor);
+		if (valor > 0.0f) {
+			ControleDaUnidade.adicionaImpostos(0.15f*valor);
+		}
+		else {
+			ControleDaUnidade.message("erro-de-insercao");
+		}
 		
 	}
 

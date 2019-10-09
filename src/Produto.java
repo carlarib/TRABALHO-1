@@ -9,24 +9,36 @@ public abstract class Produto {
 	protected String apelido;
 	
 	public Produto(String nome, int codigo, Fornecedor fornecedor, float precoDeCusto, float precoFinal) {
-		this.nome = nome;
-		this.codigo = codigo;
-		this.fornecedor = fornecedor;
-		this.precoDeCusto = precoDeCusto;
-		this.precoFinal = precoFinal;
 		
-		new Estoque(this);
+		if (nome != null && nome.equals("") && String.valueOf(codigo).length() == 6 && fornecedor != null
+			&& precoDeCusto > 0.0f && precoFinal > 0.0f) {
+			this.nome = nome;
+			this.codigo = codigo;
+			this.fornecedor = fornecedor;
+			this.precoDeCusto = precoDeCusto;
+			this.precoFinal = precoFinal;
+			new Estoque(this);
+		}
+		else {
+			ControleDaUnidade.message("erro-de-insercao");
+		}
 		
 	}
 	
 	public Produto(String nome, int codigo, Fornecedor fornecedor, float precoDeCusto, float precoFinal, int quantidadeInicial) {
-		this.nome = nome;
-		this.codigo = codigo;
-		this.fornecedor = fornecedor;
-		this.precoDeCusto = precoDeCusto;
-		this.precoFinal = precoFinal;
-		
-		new Estoque(this, quantidadeInicial);
+		if (nome != null && nome.equals("") && String.valueOf(codigo).length() == 6 && fornecedor != null
+			&& precoDeCusto > 0.0f && precoFinal > 0.0f && quantidadeInicial > 0 && quantidadeInicial <= 30) {
+			this.nome = nome;
+			this.codigo = codigo;
+			this.fornecedor = fornecedor;
+			this.precoDeCusto = precoDeCusto;
+			this.precoFinal = precoFinal;
+			
+			new Estoque(this, quantidadeInicial);
+		}
+		else {
+			ControleDaUnidade.message("erro-de-insercao");
+		}
 		
 	}
 	
@@ -50,7 +62,12 @@ public abstract class Produto {
 	
 	public void setFornecedor(Fornecedor fornecedor) {
 		
-		this.fornecedor = fornecedor;
+		if(fornecedor != null) {
+			this.fornecedor = fornecedor;
+		}
+		else {
+			ControleDaUnidade.message("erro-de-insercao");
+		}
 		
 	}
 	

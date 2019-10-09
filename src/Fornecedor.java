@@ -5,10 +5,14 @@ public abstract class Fornecedor {
 	protected String cnpj;
 	
 	public Fornecedor(String nome, Endereco endereco, String cnpj) {
-		
-		this.nome = nome;
-		this.endereco = endereco;
-		this.cnpj = cnpj;
+		if (nome != null && !nome.equals("") && endereco != null && cnpj.length() == 18) {
+			this.nome = nome;
+			this.endereco = endereco;
+			this.cnpj = cnpj;
+		}
+		else {
+			ControleDaUnidade.message("erro-de-insercao");
+		}
 		
 	}
 	
