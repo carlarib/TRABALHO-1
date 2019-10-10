@@ -18,15 +18,24 @@ public class ControleDaUnidade {
 	public ControleDaUnidade(float metaDeVenda, float valorGold, float valorPlatinum) {
 		
 		if(metaDeVenda > 0.0f && valorGold > 0.0f && valorPlatinum > 0.0f) {
-
-			ControleDaUnidade.metaDeVenda = metaDeVenda;
-			ControleDaUnidade.valorClienteGold = valorGold;
-			ControleDaUnidade.valorClientePlatinum = valorPlatinum;
 			
-			fornecedores = new Fornecedor[50];
-			funcionarios = new Funcionario[50];
-			produtos = new Estoque[50];
-			clientes = new Cliente[50];
+			if(valorGold < valorPlatinum) {
+				
+				ControleDaUnidade.metaDeVenda = metaDeVenda;
+				ControleDaUnidade.valorClienteGold = valorGold;
+				ControleDaUnidade.valorClientePlatinum = valorPlatinum;
+				
+				fornecedores = new Fornecedor[50];
+				funcionarios = new Funcionario[50];
+				produtos = new Estoque[50];
+				clientes = new Cliente[50];
+				
+			} else {
+				
+				ControleDaUnidade.message("valores-fidelidade-errados");
+				
+			}
+			
 
 		}
 		else {
@@ -63,10 +72,17 @@ public class ControleDaUnidade {
 		return valorClientePlatinum;
 		
 	}
-
+	
+	public static float getImpostos() {
+	
+		return impostos;
+		
+	}
+	
 	public static void adicionarFornecedor(Fornecedor fornecedor){
 		
 		if(fornecedor != null) {
+			
 			if(fornecedoresIndex >= fornecedores.length) {
 			
 			Fornecedor aux[] = new Fornecedor[fornecedores.length + 10];
@@ -83,16 +99,58 @@ public class ControleDaUnidade {
 		
 			fornecedores[fornecedoresIndex] = fornecedor;
 			fornecedoresIndex++;
+			
 		}
 		else {
+			
 			ControleDaUnidade.message("erro-de-insercao");
 		}
+		
+	}
+	
+	public static String buscarFornecedor(String nome) {
+		
+		if(nome == null) {
+			String aux = "Fornecedores \n -----------------------------------------------------------------";
+			
+			for(int i = 0; i < fornecedores.length && fornecedores[i] != null; i++) {
+				
+				aux += fornecedores[i].toString() + "\n" + "-----------------------------------------------------------------" + "\n";
+				
+			}
+			
+			return aux;
+			
+		} else {
+			
+			for(int i = 0; i < fornecedores.length && fornecedores[i] != null; i++) {
+				
+				if(fornecedores[i].getNome().equals(nome)) {
+					
+					return fornecedores[i].toString();
+					
+				}
+				
+				
+			}
+			
+		}
+		
+		ControleDaUnidade.message("fornecedor-nao-encontrado");
+		return null;
+		
+	}
+	
+	public static String mostrarFornecedores() {
+		
+		return buscarFornecedor(null);
 		
 	}
 	
 	public static void adicionarFuncionario(Funcionario funcionario){
 		
 		if(funcionario != null) {	
+			
 			if(funcionariosIndex >= funcionarios.length) {
 				
 				Funcionario aux[] = new Funcionario[funcionarios.length + 10];
@@ -109,16 +167,58 @@ public class ControleDaUnidade {
 			
 			funcionarios[funcionariosIndex] = funcionario;
 			funcionariosIndex++;
+			
 		}
 		else {
+			
 			ControleDaUnidade.message("erro-de-insercao");
 		}
 			
 	}
 	
+	public static String buscarFuncionario(String nome) {
+		
+		if(nome == null) {
+			String aux = "Funcionários \n -----------------------------------------------------------------";
+			
+			for(int i = 0; i < funcionarios.length && funcionarios[i] != null; i++) {
+				
+				aux += funcionarios[i].toString() + "\n" + "-----------------------------------------------------------------" + "\n";
+				
+			}
+			
+			return aux;
+			
+		} else {
+			
+			for(int i = 0; i < funcionarios.length && funcionarios[i] != null; i++) {
+				
+				if(funcionarios[i].getNome().equals(nome)) {
+					
+					return "Funcionário: \n" + funcionarios[i].toString();
+					
+				}
+				
+				
+			}
+			
+		}
+		
+		ControleDaUnidade.message("funcionario-nao-encontrado");
+		return null;
+		
+	}
+	
+	public static String mostrarFuncionarios() {
+		
+		return buscarFuncionario(null);
+		
+	}
+	
 	public static void adicionarCliente(Cliente cliente){
 		
 		if(cliente != null) {
+			
 			if(clientesIndex >= clientes.length) {
 				
 				Cliente aux[] = new Cliente[clientes.length + 10];
@@ -137,62 +237,150 @@ public class ControleDaUnidade {
 			clientesIndex++;
 		}
 		else {
+			
 			ControleDaUnidade.message("erro-de-insercao");
 		}
+		
+	}
+	
+	public static String buscarCliente(String nome) {
+		
+		if(nome == null) {
+			String aux = "Clientes \n -----------------------------------------------------------------";
+			
+			for(int i = 0; i < clientes.length && clientes[i] != null; i++) {
+				
+				aux += clientes[i].toString() + "\n" + "-----------------------------------------------------------------" + "\n";
+				
+			}
+			
+			return aux;
+			
+		} else {
+			
+			for(int i = 0; i < clientes.length && clientes[i] != null; i++) {
+				
+				if(clientes[i].getNome().equals(nome)) {
+					
+					return "Cliente: \n" + clientes[i].toString();
+					
+				}
+				
+				
+			}
+			
+		}
+		
+		ControleDaUnidade.message("cliente-nao-encontrado");
+		return null;
+		
+	}
+	
+	public static String mostrarClientes() {
+		
+		return buscarCliente(null);
 		
 	}
 	
 	public static void adicionarProduto(Estoque produto){
 		
 		if(produto != null) {
+			
 			produtos[produtosIndex] = produto;
 			produtosIndex++;
+			
 		}
 		else {
+			
 			ControleDaUnidade.message("erro-de-insercao");
 		}
 
+	}
+	
+	public static String buscarProduto(int codigo) {
+		
+		if(codigo == 0) {
+			String aux = "Produtos \n -----------------------------------------------------------------";
+			
+			for(int i = 0; i < produtos.length && produtos[i] != null; i++) {
+				
+				aux += produtos[i].toString() + "\n" + "-----------------------------------------------------------------" + "\n";
+				
+			}
+			
+			return aux;
+			
+		} else {
+			
+			for(int i = 0; i < produtos.length && produtos[i] != null; i++) {
+				
+				if(produtos[i].getCodigo() == codigo) {
+					
+					return "Produto: \n" + produtos[i].toString();
+					
+				}
+				
+				
+			}
+			
+		}
+		
+		ControleDaUnidade.message("produto-nao-encontrado");
+		return null;
+		
+	}
+	
+	public static String mostrarProdutos() {
+		
+		return buscarProduto(0);
+		
 	}
 	
 	public static Produto buscaProdutoPorCodigo() {
 		
 		int codigo = ControleDaUnidade.pedirCodigo();
 		
-		for(int i = 0; i < produtos.length && produtos[i] != null; i++) {
+		if(codigo != 0) {
 			
-			if(produtos[i].produtoPorCodigo(codigo)) {
+			for(int i = 0; i < produtos.length && produtos[i] != null; i++) {
 				
-				return produtos[i].getProdutoEmEstoque();
-				
-			}	
+				if(produtos[i].produtoPorCodigo(codigo)) {
+					
+					return produtos[i].getProdutoEmEstoque();
+					
+				}	
+			}
+			
+			ControleDaUnidade.message("produto-nao-registrado");
+
 		}
 		
-		ControleDaUnidade.message("produto-nao-registrado");
+		
 		return null;
 		
 	}
 	
 	public static int pedirCodigo() {
-		
-		int codigo = 0;
 
-		do {
-			System.out.println("Passe o código do produto");
-			codigo = scanner.nextInt();	
-		} while(String.valueOf(codigo).length() != 6);
+		System.out.println("Passe o código do produto");
+		int codigo = scanner.nextInt();	
+
+		if(String.valueOf(codigo).length() == 6) {
+			
+			return codigo;	
+		}
+			
+		ControleDaUnidade.message("codigo-invalido");
 		
-		return codigo;
-		
+		return 0;
+			
 	}
 	
 	public static boolean solicitarProdutoAoFornecedorAtual() {
-		
-		char resposta;
 
-		do {
-			System.out.println("O fornecedor atual aceitou sua solicitação? (s/n) ");
-			resposta = scanner.next().charAt(0);
-		} while(resposta != 's' || resposta != 'n');
+		System.out.println("O fornecedor atual aceitou sua solicitação? (s/n) ");
+		char resposta = scanner.next().charAt(0);
+
 		
 		return (resposta == 's');
 		
@@ -204,11 +392,9 @@ public class ControleDaUnidade {
 		
 		for(int i = 0; i < fornecedores.length && fornecedores[i] != null; i++) {
 			
-			do {
-				System.out.println("O fornecedor " + fornecedores[i].getNome() + " aceitou sua solicitação? (s/n) ");
-				resposta = scanner.next().charAt(0);
-				scanner.nextLine();
-			} while(resposta != 's' || resposta != 'n');
+			System.out.println("O fornecedor " + fornecedores[i].getNome() + " aceitou sua solicitação? (s/n) ");
+			resposta = scanner.next().charAt(0);
+			scanner.nextLine();
 			
 			if(resposta == 's'){
 				
@@ -221,7 +407,7 @@ public class ControleDaUnidade {
 		return null;
 		
 	}
-	
+
 	public static void message(String mensagem) {
 		
 		switch(mensagem) {
@@ -235,6 +421,24 @@ public class ControleDaUnidade {
 			case "erro-de-compra" : System.out.println("A compra não pode ser concluída!"); break;
 			
 			case "produto-nao-registrado" : System.out.println("O produto não está registrado ou disponível no estoque."); break;
+			
+			case "compra-inexistente" : System.out.println("A compra não existe!"); break;
+			
+			case "valores-fidelidade-errados" : System.out.println("O valor para se tornar Cliente Gold deve ser menor que o de Cliente Platinum."); break;
+			
+			case "data-invalida" : System.out.println("A data inserida não é válida!"); break;
+			
+			case "codigo-invalido" : System.out.println("O código do produto não é válido!"); break;
+			
+			case "reabastecimento-invalido" : System.out.println("A quantidade a ser reabastecida não é comportada pelo estoque!"); break;
+			
+			case "fornecedor-nao-encontrado" : System.out.println("O fornecedor não foi encontrado!"); break;
+			
+			case "funcionario-nao-encontrado" : System.out.println("O funcionário não foi encontrado!"); break;
+			
+			case "cliente-nao-encontrado" : System.out.println("O cliente não foi encontrado!"); break;
+			
+			case "produto-nao-encontrado" : System.out.println("O produto não foi encontrado!"); break;
 			
 			default : System.out.println(mensagem);
 		}

@@ -31,10 +31,18 @@ public abstract class Fornecedor {
 	@Override
 	public String toString() {
 		
-		return "Fornecedor: " + this.nome + "/n"
-				+ "Endereço: " + this.endereco + "/n"
+		String retorno = "Fornecedor: " + this.nome + "\n"
+				+ "Endereço: " + this.endereco.toString() + "\n"
 				+ "CNPJ: " + this.cnpj;
 		
+		if(this instanceof FornecedorRecorrente) {
+			
+			retorno += "\n" + "Taxa de desconto: " + ((FornecedorRecorrente) this).getTaxaDeDesconto();
+			
+		}
+		
+		
+		return retorno;
 	}
 	
 	

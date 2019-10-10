@@ -1,7 +1,7 @@
 
 public enum FormaDePagamento {
 
-	DEBITO("DÃ©bito"), CREDITO("CrÃ©dito"), DINHEIRO("Dinheiro");
+	DEBITO("Débito"), CREDITO("Crédito"), DINHEIRO("Dinheiro");
 	
 	public String formaDePagamento;
 	
@@ -11,7 +11,7 @@ public enum FormaDePagamento {
 		
 	}
 
-	public String getTipoPagamento() {
+	public String getForma() {
 		
 		return this.formaDePagamento;
 	}

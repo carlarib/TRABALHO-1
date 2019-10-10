@@ -6,10 +6,24 @@ public class Vendedor extends Funcionario {
 	public Vendedor(String nome, Endereco endereco, String cpf, String telefone, float salarioBase) {
 		super(nome, endereco, cpf, telefone, salarioBase);
 
+		this.montanteDeVendas = 0;
+		
 	}
 
+	public float getMontanteDeVendas() {
+		
+		return this.montanteDeVendas;
+		
+	}
+	
+	public void vender(float valorDeVenda) {
+		
+		this.montanteDeVendas += valorDeVenda;
+		
+	}
+	
 	@Override
-	float pagarSalario() {
+	float receberSalario() {
 
 		float salarioBruto = this.salarioBase;
 		
@@ -20,6 +34,7 @@ public class Vendedor extends Funcionario {
 		}
 		
 		this.aplicarImposto(salarioBruto);
+		this.montanteDeVendas = 0;
 		
 		return salarioBruto;
 	}

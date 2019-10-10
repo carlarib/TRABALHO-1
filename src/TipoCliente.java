@@ -11,4 +11,10 @@ public enum TipoCliente {
 		
 	}
 	
+	public String getTipoCliente() {
+		
+		return this.tipoCliente;
+		
+	}
+	
 }

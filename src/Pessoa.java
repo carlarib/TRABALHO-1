@@ -8,17 +8,34 @@ public abstract class Pessoa {
 	
 	
 	public Pessoa(String nome, Endereco endereco, String cpf, String telefone) {
-		if (nome != null || !(nome.equals(" ")) && endereco != null && cpf.length() == 14 && telefone.length() == 11) {
-		this.nome = nome;
-		this.endereco = endereco;
-		this.cpf = cpf;
-		this.telefone = telefone;
-		}
-		else {
+		if (!(nome.equals(" ")) && nome != null && endereco != null && cpf.length() == 14 && telefone.length() == 11) {
+			
+			this.nome = nome;
+			this.endereco = endereco;
+			this.cpf = cpf;
+			this.telefone = telefone;
+		
+		} else {
 			
 			ControleDaUnidade.message("erro-de-insercao");
 			
 		}
 	}
+
+	public String getNome() {
+		
+		return this.nome;
+		
+	}
 	
+	@Override
+	public String toString() {
+		
+		return "Nome: " + this.nome + "\n"
+				+ "Endereço: " + this.endereco.toString() + "\n" 
+				+ "CPF: " + this.cpf + "\n"
+				+ "Telefone: " + this.telefone;
+	
+	}
+		
 }

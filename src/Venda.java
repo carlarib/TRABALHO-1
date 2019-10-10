@@ -8,7 +8,6 @@ public class Venda implements Imposto{
 	private Cliente comprador;
 	private Fornecedor fornecedor_comprador;
 	
-
 	public Venda(Data dataDeVenda, Vendedor vendedor, Pagamento pagamento, Cliente comprador) {
 		
 		if (dataDeVenda != null && vendedor != null && pagamento != null && comprador != null) {
@@ -47,6 +46,7 @@ public class Venda implements Imposto{
 		Produto[] produtosFinal;
 		int i;
 		boolean continuar = true;
+		
 		for(i = 0; i < 20 && continuar; i++) {
 			
 			if(ControleDaUnidade.buscaProdutoPorCodigo() != null) {
@@ -85,7 +85,6 @@ public class Venda implements Imposto{
 		
 	}
 	
-	
 	public float precoParaFornecedorRecorrente(FornecedorRecorrente fornecedor) {
 		
 		float preco = 0;
@@ -111,27 +110,20 @@ public class Venda implements Imposto{
 		return preco;
 		
 	}
-	
-	
+		
 	@Override
 	public void aplicarImposto(float valor) {
-		
-		if (valor > 0.0f) {
-			ControleDaUnidade.adicionaImpostos(0.15f*valor);
-		}
-		else {
-			ControleDaUnidade.message("erro-de-insercao");
-		}
-		
+	
+		ControleDaUnidade.adicionaImpostos(0.15f*valor);
+
 	}
 
-	
-	public void cobrarCliente() {
+	public float cobrarCliente() {
 		
 		float valorGasto = this.precoTotal();
 		boolean error = false;
 		
-		switch(this.comprador.getTipoCliente()) {
+		switch(this.comprador.getTipoDoCliente()) {
 		
 		case COMUM: break;
 		
@@ -162,6 +154,9 @@ public class Venda implements Imposto{
 			
 			this.aplicarImposto(valorGasto);
 			this.comprador.comprar(valorGasto);
+			this.vendedor.vender(valorGasto);
+			
+			return valorGasto;
 			
 		} else {
 			
@@ -169,11 +164,10 @@ public class Venda implements Imposto{
 			
 		}
 		
-		
+		return 0f;
 	}
 	
-	
-	public void cobrarFornecedor() {
+	public float cobrarFornecedor() {
 		
 		boolean error = false;
 		float valorGasto;
@@ -203,6 +197,8 @@ public class Venda implements Imposto{
 		if(!error && valorGasto != 0) {
 			
 			this.aplicarImposto(valorGasto);
+			this.vendedor.vender(valorGasto);
+			return valorGasto;
 			
 		} else {
 			
@@ -210,6 +206,54 @@ public class Venda implements Imposto{
 			
 		}
 		
+		return 0f;
 	}
-
+	
+	public String gerarNota() {
+		
+		String retorno = "Nota Fiscal \n"
+						+ "Data da compra: " + this.dataDeVenda.toString()
+						+ "Vendedor: " + this.vendedor.getNome();
+		
+		if(comprador == null) {
+			
+			retorno += "\n" + "Comprador: " + this.fornecedor_comprador.getNome();
+			
+		} else {
+			
+			retorno += "\n" + "Comprador: " + this.comprador.getNome();
+			
+		}
+		
+		retorno += "\n" + "Forma de pagamento: " + this.pagamento.getFormaDePagamento().getForma() + "\n"
+					+ "Tipo de pagamento: " + this.pagamento.getTipoDePagamento().getTipo();
+		
+		if(this.pagamento.getTipoDePagamento() == TipoDePagamento.APRAZO) {
+			
+			retorno += " dividido em " + this.pagamento.getParcelas() + "vezes" + "\n";
+			
+		}
+		
+		for(int i = 0; i < produtos.length; i++) {
+			
+			retorno += produtos[i].infoNotaFiscal() + "\n";
+			
+		}
+		
+		retorno += "Valor total dos produstos: R$" + this.precoTotal();
+		
+		if(comprador == null) {
+			
+			retorno += "\n" + "Valor a ser pago: R$" + this.cobrarFornecedor();
+			
+		} else {
+			
+			retorno += "\n" + "Valor a ser pago: R$" + this.cobrarCliente();
+			
+		}
+		
+	return retorno;
+	
+	}
+	
 }

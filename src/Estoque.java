@@ -19,33 +19,34 @@ public class Estoque {
 	}
 	
 	public boolean produtoPorCodigo(int codigo) {
-
-		if(String.valueOf(codigo).length() == 6) {
-			if(this.produtoEmEstoque.getCodigo() == codigo && this.quantidadeEmEstoque > 0) {
 			
-				if(this.quantidadeEmEstoque == 2) {
-					
-					this.emitirAlerta();
-					
-				}
+		if(this.produtoEmEstoque.getCodigo() == codigo && this.quantidadeEmEstoque > 0) {
 			
-			return true;
+			if(this.quantidadeEmEstoque == 2) {
+					
+				this.emitirAlerta();
+					
+			}
+		
+		this.diminuiQuantidadeEmEstoque();
+		
+		return true;
 			
 		}
 		
 		return false;
 
-		}
-		else {
-			ControleDaUnidade.message("erro-de-insercao");
-			return false;
-		}
-		
 	}
 
 	public Produto getProdutoEmEstoque() {
 		
 		return this.produtoEmEstoque;
+		
+	}
+	
+	public int getCodigo() {
+		
+		return this.produtoEmEstoque.getCodigo();
 		
 	}
 	
@@ -64,6 +65,7 @@ public class Estoque {
 	public void reabastecerEstoque(int quantidadeReabastecida) {
 		
 		if (quantidadeReabastecida > 0 && (quantidadeReabastecida + quantidadeEmEstoque) <= 30) {
+			
 			Fornecedor fornecedorAtual = this.produtoEmEstoque.getFornecedor();
 			boolean produtoFornecido = false;
 			
@@ -97,9 +99,20 @@ public class Estoque {
 				ControleDaUnidade.message(this.produtoEmEstoque.getNome() + "foi reabastecido!");
 				
 			}
-		}
-		else {
-			ControleDaUnidade.message("erro-de-insercao");
+			
+		} else {
+			
+			ControleDaUnidade.message("reabastecimento-invalido");
+		
 		}
 	}
+
+
+	@Override
+	public String toString() {
+		return	produtoEmEstoque.toString() + "\n"
+				+ "Quantidade em estoque: " + this.quantidadeEmEstoque + " unidade(s)";
+	}
+
+	
 }

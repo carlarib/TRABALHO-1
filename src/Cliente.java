@@ -2,42 +2,52 @@
 public class Cliente extends Pessoa {
 	
 	private float valorAcumulado;
-	private TipoCliente tipoCliente;
+	private TipoCliente tipoDoCliente;
 	
 	public Cliente(String nome, Endereco endereco, String cpf, String telefone) {
 		super(nome, endereco, cpf, telefone);
 		
 		this.valorAcumulado = 0;
-		tipoCliente = TipoCliente.COMUM;
+		tipoDoCliente = TipoCliente.COMUM;
 	}
 	
-	public TipoCliente getTipoCliente() {
+	public TipoCliente getTipoDoCliente() {
 	
-		return tipoCliente;
+		return tipoDoCliente;
 	
 	}
 	
 	public void comprar(float valorGasto) {
 		
 		if(valorGasto > 0.0f) {
+			
 			this.valorAcumulado += valorGasto;
 		
 			if(this.valorAcumulado >= ControleDaUnidade.getValorClientePlatinum()) {
 				
-				this.tipoCliente = TipoCliente.PLATINUM;
+				this.tipoDoCliente = TipoCliente.PLATINUM;
 				ControleDaUnidade.message("cliente-platinum");
 				
 			} else if(this.valorAcumulado >= ControleDaUnidade.getValorClienteGold()) {
 				
-				this.tipoCliente = TipoCliente.GOLD;
+				this.tipoDoCliente = TipoCliente.GOLD;
 				ControleDaUnidade.message("cliente-gold");
 				
 			}
 		}
 		else {
-			ControleDaUnidade.message("erro-de-insercao");
+			ControleDaUnidade.message("compra-inexistente");
 		}
 		
 	}
 
+	
+	@Override
+	public String toString() {
+		
+		return super.toString() + "\n"
+				+ "Valor acumulado em compras: R$" + this.valorAcumulado + "\n"
+				+ "Tipo de fidelidade: " + this.tipoDoCliente.getTipoCliente();
+	}
+	
 }

@@ -14,4 +14,10 @@ public class ProdutoPerecivel extends Produto {
 		
 	}
 
+	public Data getDataDeValidade() {
+		
+		return this.dataDeValidade;
+		
+	}
+	
 }

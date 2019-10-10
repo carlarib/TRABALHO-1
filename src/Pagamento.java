@@ -26,6 +26,12 @@ public class Pagamento {
 		
 	}
 
+	public int getParcelas() {
+		
+		return this.parcelas;
+		
+	}
+	
 	public void setParcelas(int parcelas) {
 		
 		this.parcelas = parcelas;
