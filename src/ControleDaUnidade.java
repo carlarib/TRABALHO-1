@@ -44,6 +44,8 @@ public class ControleDaUnidade {
 		
 	}
 	
+	
+	
 	public static void adicionaImpostos(float valor) {
 		
 		if(valor > 0.0f) {
@@ -135,7 +137,22 @@ public class ControleDaUnidade {
 			}
 			
 		}
+		return null;
+	}
 		
+		public static Fornecedor buscarFornecedorPorNome(String nome) {
+				for(int i = 0; i < fornecedores.length && fornecedores[i] != null; i++) {
+					
+					if(fornecedores[i].getNome().equals(nome)) {
+						
+						return fornecedores[i];
+						
+					}
+					
+					
+				}
+				
+			
 		ControleDaUnidade.message("fornecedor-nao-encontrado");
 		return null;
 		
@@ -445,5 +462,20 @@ public class ControleDaUnidade {
 		
 	}
 	
+	public void imprimeFuncionario () {
+		Scanner novo = new Scanner (System.in);
+		String cpf;
+		
+		System.out.println("Digite o CPF do funcionário que deseja verificar, ou digite 0 para ver a lista completa de todos funcionários.");
+		cpf = novo.nextLine();
+		
+		if (cpf.equals(0)) {
+			for (int i = 0; i < funcionarios.length; i++) {
+				funcionarios[i].toString();
+			}
+		}
+		else {
+	}
 	
-}
+	
+	}}

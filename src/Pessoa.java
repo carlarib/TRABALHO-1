@@ -23,11 +23,23 @@ public abstract class Pessoa {
 	}
 
 	public String getNome() {
-		
 		return this.nome;
 		
 	}
 	
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
 	@Override
 	public String toString() {
 		
