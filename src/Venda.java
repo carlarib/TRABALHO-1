@@ -17,6 +17,7 @@ public class Venda implements Imposto{
 			this.pagamento = pagamento;
 			this.comprador = comprador;
 			
+			
 			this.cobrarCliente();
 		}
 		else {

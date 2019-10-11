@@ -1,8 +1,16 @@
+/* 
+Alunos: Carla Sawana, Bruno Monteiro, Yasmin Lied
+*/
+
+
 import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
+		ControleDaUnidade controle = new ControleDaUnidade(30564.34f, 2500.0f, 9904.23f);
+		ControleDaUnidade.adicionaImpostos(3521.30f);
+
 		Scanner novo = new Scanner(System.in);
 		
 		String respostaLaco = "sim";
@@ -19,6 +27,8 @@ public class Main {
 		System.out.println("6. Cadastrar Cliente");
 		System.out.println("7. Cadastrar Produto");
 		System.out.println("8. Cadastrar Fornecedor");
+		System.out.println("9. Realizar venda");
+		System.out.println("10. Checar imposto");
 
 		int aux = novo.nextInt();
 		novo.nextLine();
@@ -48,11 +58,11 @@ public class Main {
 			nome = novo.nextLine();
 			novo.nextLine();
 
-			System.out.println("Insira o CPF do novo funcionário");
+			System.out.println("Insira o CPF do novo funcionário (com '.' e '-')");
 			cpf = novo.nextLine();
 			novo.nextLine();
 
-			System.out.println("Insira o telefone do novo funcionário");
+			System.out.println("Insira o telefone do novo funcionário (com '-')");
 			telefone = novo.nextLine();
 			novo.nextLine();
 
@@ -91,6 +101,7 @@ public class Main {
 			if (funcao.equalsIgnoreCase("padeiro")) {
 				Funcionario f1 = new Padeiro(nome, eF1, cpf, telefone, salario);
 				ControleDaUnidade.adicionarFuncionario(f1);
+
 			}
 
 			if (funcao.equalsIgnoreCase("vendedor")) {
@@ -113,11 +124,11 @@ public class Main {
 			nomeC = novo.nextLine();
 			novo.nextLine();
 
-			System.out.println("Insira o CPF do cliente");
+			System.out.println("Insira o CPF do cliente (com '.' e '-')");
 			cpfC = novo.nextLine();
 			novo.nextLine();
 
-			System.out.println("Insira o telefone do cliente");
+			System.out.println("Insira o telefone do cliente (com '-')");
 			telefoneC = novo.nextLine();
 			novo.nextLine();
 
@@ -222,7 +233,7 @@ public class Main {
 				nomeNovoF = novo.nextLine();
 				novo.nextLine();
 
-				System.out.println("Insira o CPF do fornecedor");
+				System.out.println("Insira o CPF do fornecedor (com '.' e '-')");
 				cnpjNovoF = novo.nextLine();
 				novo.nextLine();
 
@@ -230,7 +241,7 @@ public class Main {
 				String resposta = novo.next();
 				novo.nextLine();
 
-				System.out.println("Insira o endereço do fornecedor");
+				System.out.println("Insira o endereço do fornecedor (com '-')");
 				System.out.println("Insira a rua");
 				ruaNovoF = novo.nextLine();
 				novo.nextLine();
@@ -330,7 +341,7 @@ public class Main {
 			nomeF = novo.nextLine();
 			novo.nextLine();
 
-			System.out.println("Insira o CPF do fornecedor");
+			System.out.println("Insira o CPF do fornecedor (com '.' e '-')");
 			cnpjF = novo.nextLine();
 			novo.nextLine();
 
@@ -373,6 +384,109 @@ public class Main {
 				ControleDaUnidade.adicionarFornecedor(fo1);
 			}
 		
+		break;
+
+		case 9:
+		System.out.println("Insira o dia da venda");
+		int dia = novo.nextInt();
+
+		System.out.println("Insira o mês da venda");
+		int mes = novo.nextInt();
+
+		System.out.println("Insira o ano da venda");
+		int ano = novo.nextInt();
+		novo.nextLine();
+
+		Data dataVenda = new Data(dia, mes, ano);
+
+		System.out.println("Informe o nome do vendedor");
+		String nomeVend = novo.nextLine();
+
+		System.out.println("Informe o endereço do vendedor");
+		System.out.println("Insira a rua");
+		String ruaVend = novo.nextLine();
+		novo.nextLine();
+
+		System.out.println("Insira o número");
+		int numeroVend = novo.nextInt();
+		novo.nextLine();
+
+		System.out.println("Insira o bairro");
+		String bairroVend = novo.nextLine();
+		novo.nextLine();
+
+		System.out.println("Insira a cidade");
+		String cidadeVend = novo.nextLine();
+		novo.nextLine();
+
+		System.out.println("Insira o estado");
+		String estadoVend = novo.nextLine();
+		novo.nextLine();
+
+		Endereco enderecoVend = new Endereco(ruaVend, numeroVend, bairroVend, cidadeVend, estadoVend);
+
+		System.out.println("Informe o cpf do vendedor");
+		String cpfVend = novo.nextLine();
+
+		System.out.println("Informe o telefone do vendedor");
+		String telefoneVend = novo.nextLine();
+
+		System.out.println("Informe o salário base do vendedor");
+		float salarioBaseVend = novo.nextFloat();
+		novo.nextLine();
+
+		Vendedor vend = new Vendedor(nomeVend, enderecoVend, cpfVend, telefoneVend, salarioBaseVend);
+
+
+
+		System.out.println("Informe o nome do cliente");
+		String nomeCliente = novo.nextLine();
+
+		System.out.println("Informe o endereço do cliente");
+		System.out.println("Insira a rua");
+		String ruaCliente = novo.nextLine();
+		novo.nextLine();
+
+		System.out.println("Insira o número");
+		int numeroCliente = novo.nextInt();
+		novo.nextLine();
+
+		System.out.println("Insira o bairro");
+		String bairroCliente = novo.nextLine();
+		novo.nextLine();
+
+		System.out.println("Insira a cidade");
+		String cidadeCliente = novo.nextLine();
+		novo.nextLine();
+
+		System.out.println("Insira o estado");
+		String estadoCliente = novo.nextLine();
+		novo.nextLine();
+
+		Endereco enderecoCliente = new Endereco(ruaCliente, numeroCliente, bairroCliente, cidadeCliente, estadoCliente);
+
+		System.out.println("Informe o cpf do cliente");
+		String cpfCliente = novo.nextLine();
+
+		System.out.println("Informe o telefone do cliente");
+		String telefoneCliente = novo.nextLine();
+
+		Cliente cl = new Cliente(nomeCliente, enderecoCliente, cpfCliente, telefoneCliente);
+
+		System.out.println("Informe o tipo de pagamento");
+		String tipoPag = novo.nextLine();
+
+		System.out.println("Informe a forma de pagamento");
+		String formaPag = novo.nextLine();
+
+		Pagamento pag = new Pagamento(tipoPag, formaPag);
+
+		Venda venda = new Venda(dataVenda, vend, pag, cl);
+
+		break;
+
+		case 10:
+			System.out.printf("Valor do imposto: %.3f\n", ControleDaUnidade.getImpostos());
 		break;
 		default :
 			System.out.println("Opção inválida. Tente novamente.");

@@ -5,7 +5,6 @@ public class Padeiro extends Funcionario {
 	
 	public Padeiro(String nome, Endereco endereco, String cpf, String telefone, float salarioBase) {
 		super(nome, endereco, cpf, telefone, salarioBase);
-		
 		this.horaExtra = 0;
 		
 	}
